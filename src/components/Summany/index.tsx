@@ -23,10 +23,10 @@ export const Summany = () => {
                     <img src={iconOut} alt="" />
                 </header>
                 
-                <strong>R$ 100,00</strong>
+                <strong>R$ - 100,00</strong>
             </div>
 
-            <div>
+            <div className='highLight-background'>
                 <header>
                     <p>Total</p>
                     <img src={iconTotal} alt="" />

@@ -7,6 +7,11 @@ export default createGlobalStyle`
     --blue: #5429CC;
     --blue-light: #6933FF;
     --green: #33CC95;
+    --shape: #fff;
+
+    --text-title: #363F5F;
+    --text: #969CB3;
+
 }
 
 * {
