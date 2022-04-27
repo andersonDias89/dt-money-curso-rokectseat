@@ -89,7 +89,7 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: NewTransactionMo
             activeColor='red'
           >
             <img src={inOut} alt="Saida" />
-            <span>Entrada</span>
+            <span>Saida</span>
           </RadioBox>
 
         </TransactionTypeContainer>
