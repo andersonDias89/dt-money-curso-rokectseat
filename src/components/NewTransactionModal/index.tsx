@@ -3,7 +3,10 @@ import iconClose from '../../assets/close.svg'
 import incomeImg from '../../assets/income.svg'
 import inOut from '../../assets/outcome.svg'
 import Modal from 'react-modal'
-import { useState } from 'react'
+import { FormEvent, useContext, useState } from 'react'
+
+import {api} from '../../servers/api'
+import { TransactionsContext } from '../../TransactionsContext'
 
 
 interface NewTransactionModalProps {
@@ -12,7 +15,30 @@ interface NewTransactionModalProps {
 }
 
 export const NewTransactionModal = ({ isOpen, onRequestClose }: NewTransactionModalProps) => {
+  const {creteTransaction} = useContext(TransactionsContext)
+
+  const [title, setTitle] = useState('')
+  const [amount, setAmout] = useState(0)
+  const [category, setCategory] = useState('')
   const [type, setType] = useState('deposit')
+
+  const handleCreateNewTransaction = async (event: FormEvent) => {
+    event.preventDefault()
+
+    await creteTransaction({
+      title,
+      amount,
+      category,
+      type
+    })
+    
+    setTitle('')
+    setAmout(0)
+    setCategory('')
+    setType('deposit')
+    onRequestClose()
+
+  }
 
   return (
     <Modal
@@ -30,15 +56,19 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: NewTransactionMo
         <img src={iconClose} alt="fechar modal" />
       </button>
 
-      <Container>
+      <Container onSubmit={handleCreateNewTransaction}>
         <h2>Cadastratar Transação</h2>
 
         <input
           placeholder="Titulo"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
         />
 
         <input
           placeholder="Valor"
+          value={amount}
+          onChange={(event) => setAmout(Number(event.target.value))}
         />
 
         <TransactionTypeContainer>
@@ -66,6 +96,8 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: NewTransactionMo
 
         <input
           placeholder="Categoria"
+          value={category}
+          onChange={(event) => setCategory(event.target.value)}
         />
 
         <input
